@@ -1,0 +1,21 @@
+service: find-coffee
+
+# The `provider` block defines where your service will be deployed
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+# These get passed down onto resources. You can use these for cost allocation as well as using the
+# lack of them to delete resources
+stackTags:
+
+# The `functions` block defines what code to deploy
+functions:
+  helloWorld:
+    handler: handler.helloWorld
+    # The `events` block defines how to trigger the function code.
+    events:
+      - http:
+          path: v1/coffee-shops
+          method: get
+          cors: true
